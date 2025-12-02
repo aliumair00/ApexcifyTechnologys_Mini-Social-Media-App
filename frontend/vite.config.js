@@ -21,6 +21,13 @@ export default defineConfig({
       usePolling: true, // Enable polling for file changes (useful on Windows)
       interval: 100, // Check for changes every 100ms
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   optimizeDeps: {
     force: true, // Force dependency optimization on server start
