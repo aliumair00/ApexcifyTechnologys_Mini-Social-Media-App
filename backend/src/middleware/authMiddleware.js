@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
   }
   const token = auth.split(' ')[1];
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'dev_secret_key');
     const user = await User.findById(decoded.id);
     if (!user) {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
@@ -21,4 +21,3 @@ const authMiddleware = async (req, res, next) => {
 };
 
 module.exports = authMiddleware;
-
